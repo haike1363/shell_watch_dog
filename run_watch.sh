@@ -2,6 +2,8 @@
 SHELL_DIR=$(cd `dirname $0`; pwd)
 cd ${SHELL_DIR}
 
+CHECK_INTERVAL_SECONDS=5
+
 if [ ! -e "watch_app.conf" ];then
   echo "ERROR: run.conf is not exists"
   exit 3
@@ -88,7 +90,7 @@ get_status() {
 watch() {
   while :
   do
-    sleep 5
+    sleep ${CHECK_INTERVAL_SECONDS}
     get_pid
     if [ -z "${PID_RET}" ];then
       echo "${APP_NAME} is not running now start it"
